@@ -5,12 +5,13 @@
     <title>Gamedev Canvas Workshop</title>
     <style>
     	* { padding: 0; margin: 0; }
-    	canvas { background: #eee; display: block; margin: 0 auto; }
+    	canvas { display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
 
-<canvas id="myCanvas" width="480" height="320" style="background: url('https://i.gyazo.com/aae49c6d86bff60f0e82240d5c4bd1fa.png')"></canvas>
+<canvas id="myCanvas" width="480" height="320"></canvas>
+<!-- style="background: url('https://i.gyazo.com/aae49c6d86bff60f0e82240d5c4bd1fa.png')" -->
 
 <script>
 	// JavaScript code goes here
@@ -22,6 +23,14 @@
     var dx = 2;
     var dy = -2;
     var ballRadius = 10;
+
+    function drawGrad(color1, color2) {
+        var grd = ctx.createLinearGradient(canvas.width/2, canvas.height, canvas.width/2, 0);
+        grd.addColorStop(0, color1);   // Places a color at the start
+        grd.addColorStop(1, color2);  // Places a color at the end
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, 480, 320);
+    }
 
     var paddleHeight = 15;
     var paddleWidth = 75;
@@ -50,10 +59,10 @@
 
     var bricks = [];
     for(var c=0; c<brickColumnCount; c++) {
-        changeColor('brick')
+        // changeColor('brick')
         bricks[c] = [];
         for(var r=0; r<brickRowCount; r++) {
-            changeColor('brick')
+            // changeColor('brick')
             bricks[c][r] = { x: 0, y: 0, status: 1, color: brickColor };
         }
     }
@@ -65,6 +74,7 @@
         ctx.fill();
         ctx.closePath();
     }
+
 
     function drawPaddle() {
         ctx.beginPath();
@@ -95,6 +105,27 @@
         }
     }
 
+    function drawBrickGrad() {
+
+        for(var c=0; c<brickColumnCount; c++) {
+            for(var r=0; r<brickRowCount; r++) {
+                if(bricks[c][r].status == 1) {
+                    var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+                    var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+                    bricks[c][r].x = brickX;
+                    bricks[c][r].y = brickY;
+                    ctx.beginPath();
+                    var brickGrd = ctx.createLinearGradient(brickWidth/2, brickHeight, brickWidth/2, 0);
+                    brickGrd.addColorStop(0, 'red');
+                    brickGrd.addColorStop(1, 'white');
+                    ctx.fillStyle = grd;
+                    ctx.fillRect(0, 0, brickWidth, brickHeight)
+                    ctx.closePath();
+                }
+            }
+        }
+    }
+
     function changeColor(type){
         var newColorR = Math.floor(Math.random() * 256)
         var newColorG = Math.floor(Math.random() * 256)
@@ -112,6 +143,7 @@
     function draw() {
     // drawing code
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawGrad('green', 'lightgreen')
         drawBricks();
         drawBall();
         drawPaddle();
@@ -133,7 +165,7 @@
             else {
                 x = canvas.width/2;
                 y = canvas.height-30;
-                alert("GAME OVER");
+                // alert("GAME OVER");
                 document.location.reload();
             }
         }
