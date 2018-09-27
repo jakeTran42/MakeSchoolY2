@@ -164,7 +164,6 @@ OregonH.Event.shopEvent = function(eventData) {
     //random product
     j = Math.floor(Math.random() * eventData.products.length);
 
-    //multiply price by random factor +-30%
     priceFactor = 0.7 + 0.6 * Math.random();
 
     products.push({
@@ -177,7 +176,6 @@ OregonH.Event.shopEvent = function(eventData) {
   this.ui.showShop(products);
 };
 
-//prepare an attack event
 OregonH.Event.attackEvent = function(eventData){
   var firepower = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_FIREPOWER_AVG);
   var gold = Math.round((0.7 + 0.6 * Math.random()) * OregonH.ENEMY_GOLD_AVG);
