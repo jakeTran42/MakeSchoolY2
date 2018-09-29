@@ -161,7 +161,6 @@ OregonH.Event.shopEvent = function(eventData) {
   var j, priceFactor;
 
   for(var i = 0; i < numProds; i++) {
-    //random product
     j = Math.floor(Math.random() * eventData.products.length);
 
     priceFactor = 0.7 + 0.6 * Math.random();
