@@ -153,10 +153,8 @@ OregonH.Event.stateChangeEvent = function(eventData) {
 };
 
 OregonH.Event.shopEvent = function(eventData) {
-  //number of products for sale
   var numProds = Math.ceil(Math.random() * 4);
 
-  //product list
   var products = [];
   var j, priceFactor;
 
