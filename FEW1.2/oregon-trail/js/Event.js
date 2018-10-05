@@ -113,8 +113,6 @@ OregonH.Event.generateEvent = function(){
   //pick random one
   var eventIndex = Math.floor(Math.random() * this.eventTypes.length);
   var eventData = this.eventTypes[eventIndex];
-
-  //events that consist in updating a stat
   if(eventData.type == 'STAT-CHANGE') {
     this.stateChangeEvent(eventData);
   }
@@ -123,29 +121,19 @@ OregonH.Event.generateEvent = function(){
   else if(eventData.type == 'SHOP') {
     //pause game
     this.game.pauseJourney();
-
-    //notify user
     this.ui.notify(eventData.text, eventData.notification);
-
-    //prepare event
     this.shopEvent(eventData);
   }
 
   //attacks
   else if(eventData.type == 'ATTACK') {
-    //pause game
     this.game.pauseJourney();
-
-    //notify user
     this.ui.notify(eventData.text, eventData.notification);
-
-    //prepare event
     this.attackEvent(eventData);
   }
 };
 
 OregonH.Event.stateChangeEvent = function(eventData) {
-  //can't have negative quantities
   if(eventData.value + this.caravan[eventData.stat] >= 0) {
     this.caravan[eventData.stat] += eventData.value;
     this.ui.notify(eventData.text + Math.abs(eventData.value), eventData.notification);
