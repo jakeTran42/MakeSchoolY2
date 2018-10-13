@@ -15,5 +15,23 @@ function getAColor(type) {
     return color;
 }
 
+class Ball {
+    constructor(radius = 10, color = getAColor(), dx = 4, dy = -4) {
+        this.radius = radius;
+        this.color = color;
+        this.dx = dx;
+        this.dy = dy;
+        this.x = canvas.width / 2;
+        this.y = canvas.height - 30;
+    }
+    render(ctx) {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.closePath();
+    }
+}
+
 
 draw();
