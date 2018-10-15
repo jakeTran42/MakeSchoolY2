@@ -63,5 +63,17 @@ class Brick {
     }
 }
 
+const brickRowCount = 5;
+const brickColumnCount = 6;
+const brickPadding = 10;
+const brickOffsetTop = 30;
+const brickOffsetLeft = 30;
+let bricks = [];
+for (let col = 0; col < brickColumnCount; col++) {
+    bricks[col] = [];
+    for (let row = 0; row < brickRowCount; row++) {
+        bricks[col][row] = new Brick();
+    }
+}
 
 draw();
