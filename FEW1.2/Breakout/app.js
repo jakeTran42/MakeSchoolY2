@@ -1,6 +1,19 @@
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 
+const brickRowCount = 5;
+const brickColumnCount = 6;
+const brickPadding = 10;
+const brickOffsetTop = 30;
+const brickOffsetLeft = 30;
+let bricks = [];
+for (let col = 0; col < brickColumnCount; col++) {
+    bricks[col] = [];
+    for (let row = 0; row < brickRowCount; row++) {
+        bricks[col][row] = new Brick();
+    }
+}
+
 function getAColor(type) {
     lightness = '50%'
     if (type === 'light') {
@@ -80,16 +93,32 @@ class Paddle {
     }
 }
 
-const brickRowCount = 5;
-const brickColumnCount = 6;
-const brickPadding = 10;
-const brickOffsetTop = 30;
-const brickOffsetLeft = 30;
-let bricks = [];
-for (let col = 0; col < brickColumnCount; col++) {
-    bricks[col] = [];
-    for (let row = 0; row < brickRowCount; row++) {
-        bricks[col][row] = new Brick();
+class Background {
+    constructor(color = getAColor('light')) {
+        this.color = color;
+    }
+    render(ctx) {
+        ctx.beginPath();
+
+        for (let rectCount = 0; rectCount < 10; rectCount++) {
+            const rectX = canvas.width / 10 * rectCount
+            const rectY = 0
+            const rectWidth = canvas.width / 10
+            const rectHeight = canvas.height
+            ctx.fillStyle = `hsl(${360 / 10 * rectCount}, 100%, 50%)`;
+            ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
+        }
+        // Fill with rainbow arch
+        for (let rectCount = 10; rectCount > 0; rectCount--) {
+            // Begin path is necessary here
+            ctx.beginPath();
+            // Math to get rainbow color order correct
+            const colorCount = 10 - rectCount
+            ctx.fillStyle = `hsl(${360 / 10 * colorCount}, 100%, 50%)`;
+            ctx.arc(canvas.width / 2, canvas.height, 25 * rectCount, Math.PI, 0);
+            ctx.fill();
+        }
+        ctx.closePath();
     }
 }
 
