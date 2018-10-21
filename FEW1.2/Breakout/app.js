@@ -122,4 +122,19 @@ class Background {
     }
 }
 
+class Score {
+    constructor(x = 8, y = 20, color = '#000000', font = '16px Arial', score = 0) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.font = font;
+        this.score = score;
+    }
+    render(ctx) {
+        ctx.font = this.font;
+        ctx.fillStyle = this.color;
+        ctx.fillText('Score: ' + this.score, this.x, this.y);
+    }
+}
+
 draw();
