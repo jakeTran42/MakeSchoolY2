@@ -137,4 +137,19 @@ class Score {
     }
 }
 
+class Lives {
+    constructor(x = canvas.width - 65, y = 20, color = '#000000', font = '16px Arial', lives = 3) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.font = font;
+        this.lives = lives;
+    }
+    render(ctx) {
+        ctx.font = this.font;
+        ctx.fillStyle = this.color;
+        ctx.fillText('Lives: ' + this.lives, this.x, this.y)
+    }
+}
+
 draw();
