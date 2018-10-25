@@ -1,6 +1,15 @@
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 
+let ball = new Ball();
+let paddle = new Paddle();
+let background = new Background();
+let score = new Score();
+let lives = new Lives();
+let rightPressed = false;
+let leftPressed = false;
+
+
 const brickRowCount = 5;
 const brickColumnCount = 6;
 const brickPadding = 10;
