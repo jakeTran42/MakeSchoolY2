@@ -161,4 +161,18 @@ class Lives {
     }
 }
 
+function drawBricks() {
+    for (let col = 0; col < brickColumnCount; col++) {
+        for (let row = 0; row < brickRowCount; row++) {
+            if (bricks[col][row].status == 1) {
+                const brickX = (col * (bricks[col][row].width + brickPadding)) + brickOffsetLeft
+                const brickY = (row * (bricks[col][row].height + brickPadding)) + brickOffsetTop
+                bricks[col][row].x = brickX;
+                bricks[col][row].y = brickY;
+                bricks[col][row].render(ctx);
+            }
+        }
+    }
+}
+
 draw();
