@@ -175,4 +175,10 @@ function drawBricks() {
     }
 }
 
+function collided(brick) {
+    xDifference = ball.x - Math.max(brick.x, Math.min(ball.x, brick.x + brick.width));
+    yDifference = ball.y - Math.max(brick.y, Math.min(ball.y, brick.y + brick.height));
+    return (xDifference ** 2 + yDifference ** 2) < (ball.radius * ball.radius);
+}
+
 draw();
