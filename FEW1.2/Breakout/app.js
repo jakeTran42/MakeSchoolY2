@@ -175,6 +175,25 @@ function drawBricks() {
     }
 }
 
+function collisionDetection() {
+    for (var c = 0; c < brickColumnCount; c++) {
+        for (var r = 0; r < brickRowCount; r++) {
+            var b = bricks[c][r];
+            if (b.status == 1) {
+                if (collided(b)) {
+                    ball.dy = -ball.dy;
+                    b.status = 0;
+                    score.score++;
+                    if (score.score == brickRowCount * brickColumnCount) {
+                        alert('You Won! Congratulations!')
+                        document.location.reload();
+                    }
+                }
+            }
+        }
+    }
+}
+
 function collided(brick) {
     xDifference = ball.x - Math.max(brick.x, Math.min(ball.x, brick.x + brick.width));
     yDifference = ball.y - Math.max(brick.y, Math.min(ball.y, brick.y + brick.height));
