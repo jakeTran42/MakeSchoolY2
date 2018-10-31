@@ -200,4 +200,51 @@ function collided(brick) {
     return (xDifference ** 2 + yDifference ** 2) < (ball.radius * ball.radius);
 }
 
+function draw() {
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    background.render(ctx);
+    ball.render(ctx);
+    paddle.render(ctx);
+    drawBricks();
+    collisionDetection();
+    score.render(ctx);
+    lives.render(ctx);
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+    // Collision for right edge and left edge
+    if (ball.x + ball.dx > canvas.width - ball.radius || ball.x + ball.dx < ball.radius) {
+        ball.dx = -ball.dx;
+    }
+    // Collision for top edge and bottom edge
+    if (ball.y + ball.dy < ball.radius) {
+        ball.dy = -ball.dy;
+    } else if (ball.y + ball.dy > canvas.height - ball.radius) {
+        if (ball.x > paddle.x && ball.x < paddle.x + paddle.width) {
+            ball.dy = -ball.dy;
+        } else {
+            lives.lives--;
+            if (!lives.lives) {
+                alert("Game Over");
+                ball.x = canvas.width / 2;
+                ball.y = canvas.height / 2;
+                document.location.reload();
+            } else {
+                ball.x = canvas.width / 2;
+                ball.y = canvas.height - 30;
+                ball.dx = 4;
+                ball.dy = -4;
+                paddle.x = (canvas.width - paddle.width) / 2;
+            }
+        }
+    }
+    // Move the paddle
+    if (rightPressed && paddle.x < canvas.width - paddle.width) {
+        paddle.x += 7;
+    } else if (leftPressed && paddle.x > 0) {
+        paddle.x -= 7;
+    }
+    requestAnimationFrame(draw);
+}
+
 draw();
