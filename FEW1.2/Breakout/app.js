@@ -1,6 +1,7 @@
 let canvas = document.getElementById('myCanvas');
 let ctx = canvas.getContext('2d');
 
+
 let ball = new Ball();
 let paddle = new Paddle();
 let background = new Background();
@@ -8,7 +9,6 @@ let score = new Score();
 let lives = new Lives();
 let rightPressed = false;
 let leftPressed = false;
-
 
 const brickRowCount = 5;
 const brickColumnCount = 6;
@@ -23,22 +23,9 @@ for (let col = 0; col < brickColumnCount; col++) {
     }
 }
 
-function getAColor(type) {
-    lightness = '50%'
-    if (type === 'light') {
-        lightness = '80%'
-    };
-    saturation = '100%'
-    if (type === 'dark') {
-        saturation = '70%'
-    };
-    hue = Math.floor(Math.random() * 361);
-    color = `hsl(${hue}, ${saturation}, ${lightness})`;
-    return color;
-}
 
 class Ball {
-    constructor(radius = 10, color = getAColor(), dx = 4, dy = -4) {
+    constructor(radius = 10, color = changeColor(), dx = 4, dy = -4) {
         this.radius = radius;
         this.color = color;
         this.dx = dx;
@@ -56,7 +43,7 @@ class Ball {
 }
 
 class Brick {
-    constructor(x = 0, y = 0, status = 1, width = 75, height = 20, color = getAColor('dark')) {
+    constructor(x = 0, y = 0, status = 1, width = 75, height = 20, color = changeColor('dark')) {
         this.x = x;
         this.y = y;
         this.status = status;
@@ -65,18 +52,14 @@ class Brick {
         this.color = color;
     }
     render(ctx) {
-        // Set locations for gradient
         const startX = this.x + this.width / 2;
         const startY = this.y + this.width;
         const endX = this.x + this.width / 2;
         const endY = this.y;
         // Create gradient
         const brkGrd = ctx.createLinearGradient(startX, startY, endX, endY);
-        // Places a color at the start
         brkGrd.addColorStop(0, 'black');
-        // Places a color at the end
         brkGrd.addColorStop(1, this.color);
-        // Paint gradient
         ctx.beginPath();
         ctx.fillStyle = brkGrd;
         ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -86,7 +69,7 @@ class Brick {
 }
 
 class Paddle {
-    constructor(x = (canvas.width - 75) / 2, y = 0, width = 75, height = 10, color = getAColor('dark')) {
+    constructor(x = (canvas.width - 75) / 2, y = 0, width = 75, height = 10, color = changeColor('dark')) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -102,8 +85,9 @@ class Paddle {
     }
 }
 
+
 class Background {
-    constructor(color = getAColor('light')) {
+    constructor(color = changeColor('light')) {
         this.color = color;
     }
     render(ctx) {
@@ -117,11 +101,8 @@ class Background {
             ctx.fillStyle = `hsl(${360 / 10 * rectCount}, 100%, 50%)`;
             ctx.fillRect(rectX, rectY, rectWidth, rectHeight);
         }
-        // Fill with rainbow arch
         for (let rectCount = 10; rectCount > 0; rectCount--) {
-            // Begin path is necessary here
             ctx.beginPath();
-            // Math to get rainbow color order correct
             const colorCount = 10 - rectCount
             ctx.fillStyle = `hsl(${360 / 10 * colorCount}, 100%, 50%)`;
             ctx.arc(canvas.width / 2, canvas.height, 25 * rectCount, Math.PI, 0);
@@ -130,6 +111,7 @@ class Background {
         ctx.closePath();
     }
 }
+
 
 class Score {
     constructor(x = 8, y = 20, color = '#000000', font = '16px Arial', score = 0) {
@@ -146,6 +128,7 @@ class Score {
     }
 }
 
+
 class Lives {
     constructor(x = canvas.width - 65, y = 20, color = '#000000', font = '16px Arial', lives = 3) {
         this.x = x;
@@ -161,6 +144,22 @@ class Lives {
     }
 }
 
+function changeColor(type){
+    var newColorR = Math.floor(Math.random() * 256)
+    var newColorG = Math.floor(Math.random() * 256)
+    var newColorB = Math.floor(Math.random() * 256)
+    let color = white;
+
+    if (type == 'ball') {
+        color = `rgba(${newColorR}, ${newColorG}, ${newColorB}, 1)`
+    } else if (type == 'paddle') {
+        color = `rgba(${newColorR}, ${newColorG}, ${newColorB}, 1)`
+    } else if (type == 'brick') {
+        color = `rgba(${newColorR}, ${newColorG}, ${newColorB}, 1)`
+    }
+    return color
+}
+
 function drawBricks() {
     for (let col = 0; col < brickColumnCount; col++) {
         for (let row = 0; row < brickRowCount; row++) {
@@ -174,6 +173,14 @@ function drawBricks() {
         }
     }
 }
+
+
+function collided(brick) {
+    xDifference = ball.x - Math.max(brick.x, Math.min(ball.x, brick.x + brick.width));
+    yDifference = ball.y - Math.max(brick.y, Math.min(ball.y, brick.y + brick.height));
+    return (xDifference ** 2 + yDifference ** 2) < (ball.radius * ball.radius);
+}
+
 
 function collisionDetection() {
     for (var c = 0; c < brickColumnCount; c++) {
@@ -194,11 +201,6 @@ function collisionDetection() {
     }
 }
 
-function collided(brick) {
-    xDifference = ball.x - Math.max(brick.x, Math.min(ball.x, brick.x + brick.width));
-    yDifference = ball.y - Math.max(brick.y, Math.min(ball.y, brick.y + brick.height));
-    return (xDifference ** 2 + yDifference ** 2) < (ball.radius * ball.radius);
-}
 
 function draw() {
     // Clear canvas
@@ -246,6 +248,7 @@ function draw() {
     }
     requestAnimationFrame(draw);
 }
+
 
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
