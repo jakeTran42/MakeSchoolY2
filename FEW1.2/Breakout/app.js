@@ -56,7 +56,6 @@ class Brick {
         const startY = this.y + this.width;
         const endX = this.x + this.width / 2;
         const endY = this.y;
-        // Create gradient
         const brkGrd = ctx.createLinearGradient(startX, startY, endX, endY);
         brkGrd.addColorStop(0, 'black');
         brkGrd.addColorStop(1, this.color);
@@ -214,11 +213,9 @@ function draw() {
     lives.render(ctx);
     ball.x += ball.dx;
     ball.y += ball.dy;
-    // Collision for right edge and left edge
     if (ball.x + ball.dx > canvas.width - ball.radius || ball.x + ball.dx < ball.radius) {
         ball.dx = -ball.dx;
     }
-    // Collision for top edge and bottom edge
     if (ball.y + ball.dy < ball.radius) {
         ball.dy = -ball.dy;
     } else if (ball.y + ball.dy > canvas.height - ball.radius) {
@@ -240,7 +237,6 @@ function draw() {
             }
         }
     }
-    // Move the paddle
     if (rightPressed && paddle.x < canvas.width - paddle.width) {
         paddle.x += 7;
     } else if (leftPressed && paddle.x > 0) {
