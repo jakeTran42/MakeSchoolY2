@@ -7,8 +7,16 @@ var config = {
     height: 600,
     scene: {
         preload: preload,
-        create: create
-    }
+        create: create,
+        update: update
+    },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: false
+        }
+    },
 };
 
 var game = new Phaser.Game(config);
