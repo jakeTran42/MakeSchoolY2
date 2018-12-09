@@ -1,7 +1,5 @@
 const { GraphQLServer } = require('graphql-yoga')
 
-// 1
-
 let links =[{
   id: 'link-0',
   url: 'www.howtographql.com',
