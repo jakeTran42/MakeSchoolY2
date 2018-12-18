@@ -5,6 +5,7 @@ const Mutation = require('./resolvers/Mutation')
 const User = require('./resolvers/User')
 const Link = require('./resolvers/Link')
 
+
 // let links =[{
 //   id: 'link-0',
 //   url: 'www.howtographql.com',
