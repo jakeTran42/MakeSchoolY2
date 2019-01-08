@@ -44,6 +44,7 @@ const GitHub = () => (
         <div>
           <h1>Success!!!!!</h1>
           {data.organization.repositories.edges.map((item) => <p>{item.node.url}</p>)}
+          {/* {[1,2,3,4].map(n => <h1>{n}</h1>)} */}
         </div>
       );
     }}
