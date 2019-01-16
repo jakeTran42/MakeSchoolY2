@@ -34,6 +34,7 @@ class CreateLink extends Component {
                     type="text"
                     placeholder="A description for the link"
                 />
+
                 <input
                     className="mb2"
                     value={url}
@@ -43,7 +44,14 @@ class CreateLink extends Component {
                 />
                 </div>
 
-                <Mutation mutation={POST_MUTATION} variables={{ description, url }} onCompleted={() => this.props.history.push('/')}>
+                <Mutation mutation={POST_MUTATION} variables={{ description, url }} onCompleted={() => {
+                    // show modal 
+                        // close button executes -> this.props.history.push('/')
+                        // or <Link to="/">Close</Link>
+                    
+                    // other code 
+                    this.props.history.push('/')
+                }}>
                     {postMutation => <button onClick={postMutation}>Submit</button>}
                 </Mutation>
 
