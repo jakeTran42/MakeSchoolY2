@@ -9,6 +9,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { BrowserRouter } from 'react-router-dom'
 import { setContext } from 'apollo-link-context'
+import { AUTH_TOKEN } from './constants'
 
 const httpLink = createHttpLink({
     uri: 'http://localhost:4000'
@@ -24,8 +25,13 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
+// const headers = {a;11, b: 22}
+// const newHeaders = {...headers, c:33} // {a:11, b:22, c:33}
+
+
+
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 })
 
