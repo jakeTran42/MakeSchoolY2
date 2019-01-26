@@ -11,7 +11,8 @@ class API2 extends Component {
     }
 
     componentDidMount() {
-        let url = `https://api-v3.igdb.com/games/?search=${this.state.search}`
+        // let url = `https://api-v3.igdb.com/games/?search=${this.state.search}`
+        let url = `/games/?search=${this.state.search}`
         console.log(url)
         axios({
             url: url,
@@ -19,23 +20,28 @@ class API2 extends Component {
             headers: {
                 'X-Id-Token': 'abc123abc123',
                 'Content-Type': 'application/json',
-                'user-key': '462843eb01e2e3eb1d654648e7159dda'
+                'user-key': '462843eb01e2e3eb1d654648e7159dda',
             }
          })
+         // .then(res => res.json())
         .then(result => {
-            return result.json();
-        }).then(data => {
-            let games = data.results.map((game) => {
+            return JSON.parse(result.data);
+        })
+        .then(data => {
+            let games = data.map((game) => {
                 return(
-                    <div>
+                    <div key={game.id}>
                         <h1>{game.name}</h1>
-                        <p>{game.url}</p>
+                        <h2>{game.category}</h2>
                     </div>
                 )
                 // console.log(games)
             })
             this.setState({games: games});
-            // console.log(data)
+
+            // console.log(JSON.parse(data)[0])
+
+            console.log(data)
         })
     }
 
