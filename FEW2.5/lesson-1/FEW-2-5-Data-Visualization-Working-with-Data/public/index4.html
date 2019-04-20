@@ -1,0 +1,181 @@
+<div class="container">
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <canvas id="myChart2" width="400" height="400"></canvas>
+    <canvas id="myChart3" width="400" height="400"></canvas>
+</div>
+
+
+<style>
+    /* canvas {
+        width: 200px !important;
+        height: 200px !important;
+    } */
+    .container {
+        display: flex;
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+
+    fetch('metal_bands_2017.csv')
+    .then(res => res.text())
+    // .then(data => handleCSV(data))
+    // .then(cleanData => getBandByCountry(cleanData))
+    .then(data => displayChart(data))
+
+    function handleCSV(data) {
+        const a = data.split('\n')
+        const objectArr = []
+        const keys = a[0].split(',')
+        for (let i = 1; i < a.length; i++) {
+            const obj = {}
+            const row = a[i].split(',')
+            for (let j = 0; j < row.length; j++) {
+                obj[keys[j]] = row[j]
+            }
+            objectArr.push(obj)
+        }
+        // console.log(objectArr)
+        return objectArr
+    }
+
+    function getBandByCountry(data) {
+        // console.log(data)
+        const bandCountryData = data.reduce((obj, band) => {
+            if(band.origin in obj) {
+                obj[band.origin]++
+                return obj
+            } else {
+                obj[band.origin] = 1
+                return obj
+            }
+        }, {})
+
+        return(bandCountryData)
+    }
+
+    function getBandByDate(data) {
+        // console.log(data)
+        const bandCountryData = data.reduce((obj, band) => {
+            if(band.formed in obj) {
+                obj[band.formed]++
+                return obj
+            } else {
+                obj[band.formed] = 1
+                return obj
+            }
+        }, {})
+
+        return(bandCountryData)
+    }
+
+    function getBandBySplit(data) {
+        // console.log(data)
+        const bandCountryData = data.reduce((obj, band) => {
+            if(band.split in obj) {
+                obj[band.split]++
+                return obj
+            } else {
+                obj[band.split] = 1
+                return obj
+            }
+        }, {})
+
+        return(bandCountryData)
+    }
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx2 = document.getElementById('myChart2').getContext('2d');
+    var ctx3 = document.getElementById('myChart3').getContext('2d');
+    function displayChart(data, type) {
+
+        let cleanData = handleCSV(data)
+        let bandByCountry = getBandByCountry(cleanData)
+        let bandByDate = getBandByDate(cleanData)
+        let bandBySplit = getBandBySplit(cleanData)
+        // console.log(band)
+
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'radar',
+
+            // The data for our dataset
+            data: {
+                labels: Object.keys(bandByCountry).slice(0,10),
+                datasets: [{
+                    label: 'Band By Country',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: Object.values(bandByCountry).slice(0,10)
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+            }
+        });
+
+        var chart = new Chart(ctx2, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: Object.keys(bandByDate),
+                datasets: [{
+                    label: 'Band By Creation Date',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: Object.values(bandByDate)
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+            }
+        });
+        var chart = new Chart(ctx3, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: Object.keys(bandBySplit),
+                datasets: [{
+                    label: 'band By Disband Date',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: Object.values(bandBySplit)
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+            }
+        });
+    }
+
+    // function chooseChartType() {
+    //     const types = ['line', 'bar', 'radar', 'polarArea']
+    //     const container = document.getElementById('container')
+    //     types.forEach(value => {
+    //         const el = document.createElement('BUTTON')
+    //         el.innerHTML = value
+    //         el.style.height = '50px'
+    //         el.style.backgroundColor = '#23f'
+    //         el.style.margin = '0 5px'
+    //         el.style.flex = 1
+    //         container.appendChild(el)
+    //     })
+    // }
+
+    // chooseChartType()
+
+    </script>

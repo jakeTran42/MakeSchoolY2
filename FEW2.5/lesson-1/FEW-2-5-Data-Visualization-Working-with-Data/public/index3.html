@@ -1,0 +1,100 @@
+<canvas id="chart" width="600" height="450"></canvas> 
+
+<script>
+
+    fetch('titanic-passengers.json')
+    .then(res => res.json())
+    .then(json => drawbars(110, 350, 450, findSibSp(json)))
+    .catch(err => console.log(err.message))
+
+    var _canvas = document.getElementById('chart');
+    var _ctx = _canvas.getContext("2d");
+
+    function findSibSp(data){
+        const flatArr = data.map((data) => {
+        return data.fields
+        })
+
+        const SibspCount = flatArr.reduce((obj, item) => {
+            if(item.sibsp in obj){
+                obj[item.sibsp]++
+                return obj
+            } else {
+                obj[item.sibsp] = 1
+                return obj
+            }}, {})
+        return(SibspCount)
+    }
+
+    function normalized(data) {
+        const values = Object.values(data)
+        const maxValue = Math.max(...values)
+        const normalizedValues = Object.keys(data).map(key => {
+          return({sibling: key, countPercentage: (data[key])/maxValue})
+        })
+        return normalizedValues
+    }
+
+    function drawbars(baseX, baseY, chartWidth, data) {
+
+        var leftY, rightX;
+        leftY = 30;
+        rightX = baseX + chartWidth;
+        Yheight = baseY - leftY
+        // Draw y axis.
+        _ctx.moveTo(baseX, leftY);
+        _ctx.lineTo(baseX, baseY);
+        // Draw arrow for y axis.
+        _ctx.moveTo(baseX, leftY);
+        _ctx.lineTo(baseX + 5, leftY + 5);
+        _ctx.moveTo(baseX, leftY);
+        _ctx.lineTo(baseX - 5, leftY + 5);
+        // Draw x axis.
+        _ctx.moveTo(baseX, baseY);
+        _ctx.lineTo(rightX, baseY);
+        // Draw arrow for x axis.
+        _ctx.moveTo(rightX, baseY);
+        _ctx.lineTo(rightX - 5, baseY + 5);
+        _ctx.moveTo(rightX, baseY);
+        _ctx.lineTo(rightX - 5, baseY - 5);
+        // Define style and stroke lines.
+        _ctx.strokeStyle = "#000";
+        _ctx.stroke();
+
+        var height, widthOffset;
+
+        height = _ctx.canvas.height;
+        widthOffset = _ctx.canvas.width/2;
+        _ctx.font = "bold 18px sans-serif";
+        _ctx.fillText("No. of Siblings", widthOffset, height - 20);
+
+        var heightOffset = _ctx.canvas.height/2
+        _ctx.fillText('Count %', 20, heightOffset)
+
+        const normalizedData = normalized(data)
+
+        var i, length, sibling, count;
+        var barWidth = 10;
+        var xPos = baseX + 30;
+        var baseY = 375;       
+        for (i = 0, length = normalizedData.length; i < length; i++) {
+            sibling = normalizedData[i].sibling;
+            countPercent = normalizedData[i].countPercentage * (Yheight);
+            console.log(countPercent)
+            _ctx.fillText(sibling, xPos, baseY)
+            _ctx.fillStyle = `hsl(${Math.floor(Math.random() * 360) + 1}, 100%, 50%)`
+            _ctx.fillRect(xPos, baseY - countPercent-1 - 23, barWidth, countPercent);
+            xPos += 50;
+        }
+    }
+
+
+</script>
+
+<style>
+    canvas {
+        border-width: 5px;
+        border-style: dashed;
+        border-color: rgba(20, 126, 239, 0.50)
+    }
+</style>

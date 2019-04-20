@@ -1,0 +1,107 @@
+<!-- <button id="button">Click</button> -->
+<button id="toggle">Toggle</button>
+<div id="container"></div>
+
+<!-- <div id="container"></div> -->
+
+<script>
+  // Load the titanic data. You must run this from a server. 
+  // It won't load from the desktop becuase of CORS.
+  fetch('titanic-passengers.json')
+  .then(res => res.json())
+  .then(json => handleData(findSibSp(json))) // Call handleData()
+  .catch(err => console.log(err.message))
+
+  function findSibSp(data){
+        const flatArr = data.map((data) => {
+        return data.fields
+        })
+
+        const SibspCount = flatArr.reduce((obj, item) => {
+            if(item.sibsp in obj){
+                obj[item.sibsp]++
+                return obj
+            } else {
+                obj[item.sibsp] = 1
+                return obj
+            }}, {})
+        return(Object.values(SibspCount))
+    }
+
+  function handleData(titanicData){
+
+    const data = titanicData
+    const container = document.getElementById('container')
+    container.style.border = '3px solid black'
+    container.style.display = 'flex'
+    container.style.alignItems = 'flex-end'
+    container.style.width = `fit-content`
+    container.style.height = `fit-content`
+
+    function setStyle(data) {
+        const elements = []
+        data.forEach((item) => {
+            const el = document.createElement('div')
+            container.appendChild(el)
+            el.style.width = '15px'
+            el.style.margin = '0 10px 0 10px'
+            el.style.backgroundColor = 'blue'
+            el.style.height = `${item}`
+            elements.push(el)
+
+        })
+    }
+
+    function setStyle2(data) {
+        const elements = []
+        data.forEach((item) => {
+            const el =  document.createElement('div')
+            container.appendChild(el)
+            el.style.height = `${item}px`
+            el.style.width = `${item}px`
+            el.style.margin = '1px'
+            el.style.backgroundColor = 'red'
+            el.style.borderRadius = '50%'
+            el.style.transition = '4000ms ease-in-out'
+            elements.push(el)
+            el.style.flexDirection = 'column'
+
+        })
+    }
+
+    // setStyle(data)
+    
+    
+    const button = document.getElementById('button')
+    const toggle = document.getElementById('toggle')
+    
+    function makeToggle(el, callback) {
+        let state = false
+        el.addEventListener('click', (e) => {
+            state = !state
+            if (state) {
+                el.style.backgroundColor = '#000'
+                el.style.color = '#fff'
+            } else {
+                el.style.backgroundColor = '#fff'
+                el.style.color = '#000'
+            }
+            callback(state)
+        })
+    }
+    
+    makeToggle(toggle, (state) => {
+        if (state) {
+            setStyle(data)
+        } else {
+            setStyle2(data)
+        }
+    })
+
+    // makeToggle(button, (state) => {
+    //     document.querySelector('body').style.flexDirection = state ? 'row' : 'column'
+    //     document.querySelector('body').style.display = 'flex'
+    // })
+  }
+
+</script>

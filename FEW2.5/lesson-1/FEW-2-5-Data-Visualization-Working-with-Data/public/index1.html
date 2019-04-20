@@ -1,0 +1,219 @@
+<div id="data-display"></div>
+<div id="container"></div>
+
+<!-- <div id="container"></div> -->
+
+<script>
+  // Load the titanic data. You must run this from a server. 
+  // It won't load from the desktop becuase of CORS.
+  fetch('titanic-passengers.json')
+  .then(res => res.json())
+  .then(json => {
+    // console.log(json)
+    findSibSp(json)
+    return json})
+  // .then(json => handleData(json)) // Call handleData()
+  .catch(err => console.log(err.message))
+
+  // This function handles to the JSON data loaded
+  function handleData(data) {
+    
+    // Number of passengers. There is one record for each passenger.
+    console.log(`Number of passengers: ${data.length}`)
+
+    // Number of women
+    const womenCount = countFields(data, 'sex', 'female')
+    console.log(`Women count: ${womenCount}`)
+
+    // Number of men
+    const menCount = countFields(data, 'sex', 'male')
+    console.log(`Men count: ${menCount}`)
+
+    // Agregate all female passengers
+    const femalePassengers = data.filter(passenger => passenger.fields.sex === 'female')
+    const malePassengers = data.filter(passenger => passenger.fields.sex === 'male')
+
+    // Find min female age
+    const femaleMinAge = femalePassengers.reduce((acc, passenger) => {
+      if (!passenger.fields.age) return acc
+      return Math.min(acc, Number(passenger.fields.age))
+    }, 9999)
+
+    // Find maximum female age
+    const femaleMaxAge = femalePassengers.reduce((acc, passenger) => {
+      if (!passenger.fields.age) return acc 
+      return Math.max(acc, Number(passenger.fields.age))
+    }, 0)
+    console.log(`Youngest female: ${femaleMinAge} Oldest female: ${femaleMaxAge}`)
+
+    // Find minimum fare paid 
+    const minFare = data.reduce((acc, passenger) => {
+      if (Number(!passenger.fields.fare)) return acc
+      return Math.min(acc, Number(passenger.fields.fare))
+    }, 999999)
+
+    // Find Maximum fare paid
+    const maxFare = data.reduce((acc, passenger) => {
+      if (Number(!passenger.fields.fare)) return acc
+      return Math.max(acc, Number(passenger.fields.fare))
+    }, 0)
+
+    console.log(`Minimum fare: ${minFare} Max Fare: ${maxFare}`)
+
+    // Average fare
+    // Get all passengers that have a valid fare.
+    const allFares = data.filter(passenger => passenger.fields.fare)
+    const averageFare = data.reduce((acc, passenger) => acc + Number(passenger.fields.fare), 0) / allFares.length
+
+    console.log(`Average Fare: ${averageFare}`)
+
+    // Passengers by class. Use Array.reduce to find all possible 
+    // values of of a field.
+    const allClasses = data.reduce((acc, passenger) => {
+      if (acc.indexOf(passenger.fields.pclass) === -1) {
+        return [...acc, acc.push(passenger.fields.pclass)]
+      } 
+      return acc
+    }, [])
+
+    console.log(allClasses)
+    
+    const totalFares = data.reduce((acc, passenger) => {
+      return acc + passenger.fields.fare
+    }, 0)
+    console.log(totalFares)
+
+    const dataDisplay = document.getElementById('data-display')
+    dataDisplay.innerHTML = `
+      <p>Number of Passengers: ${data.length}</p>
+      <p>Number of Men: ${menCount}</p>
+      <p>Number of Women: ${womenCount}</p>
+      <p>Youngest female: ${femaleMinAge} Oldest female: ${femaleMaxAge}</p>
+      <p>Minimum fare: ${minFare} Max Fare: ${maxFare}</p>
+      <p>Average Fare: ${averageFare}</p>
+      <p>Number survived: ?? </p>
+      <p>Numebr died: ??</p>
+      <p>Number of men survived: ??</p>
+      <p>Number of men died: ??</p>
+      <p>Number of women survived: ??</p>
+      <p>Number of women died: ??</p>
+    `
+
+    // Graph the number of men vs women
+    const displayMenAndWomen = document.createElement('div')
+    displayMenAndWomen.style.width = '200px'
+    displayMenAndWomen.style.height = '200px'
+    displayMenAndWomen.style.border = '1px solid'
+    displayMenAndWomen.style.display = 'flex'
+    displayMenAndWomen.style.justifyContent = 'center'
+    displayMenAndWomen.style.alignItems = 'flex-end'
+    document.querySelector('body').appendChild(displayMenAndWomen)
+
+    const displayMen = document.createElement('div')
+    const displayWomen = document.createElement('div')
+
+    displayMen.style.width = '50px'
+    displayMen.style.height = `${menCount / menCount * 100}%`
+    displayMen.style.backgroundColor = '#23f'
+    displayMen.style.margin = '0 5px'
+
+    displayWomen.style.width = '50px'
+    displayWomen.style.height = `${womenCount / menCount * 100}%`
+    displayWomen.style.backgroundColor = '#f23'
+    displayWomen.style.margin = '0 5px'
+
+    displayMenAndWomen.appendChild(displayMen)
+    displayMenAndWomen.appendChild(displayWomen)
+
+    // Use make bar graph
+    // Make an array of values 
+    const values = [88, 77, 33, 55, 24, 90, 57, 44]
+    const barGraph = makeBarGraph(values)
+    console.log(barGraph)
+    document.querySelector('body').appendChild(barGraph)
+  }
+
+  function makeBarGraph(values) {
+    // Make a container
+    const container = document.createElement('div')
+    container.style.width = '200px'
+    container.style.height = '200px'
+    container.style.border = '1px solid'
+    container.style.display = 'flex'
+    container.style.justifyContent = 'center'
+    container.style.alignItems = 'flex-end'
+
+    const max = Math.max(...values)
+
+    // Make some bars
+    values.forEach(value => {
+      const el = document.createElement('div')
+
+      el.style.height = `${value / max * 100}%`
+      el.style.backgroundColor = '#23f'
+      el.style.margin = '0 5px'
+      el.style.flex = 1
+
+      container.appendChild(el)
+    });
+    
+    // Return the container 
+    return container
+  }
+
+  function countFields(data, field, value) {
+    return data.reduce((acc, passenger) => {
+      if (passenger.fields[field] === value) {
+        return acc += 1
+      }
+      return acc
+    }, 0)
+  }
+
+  function findSibSp(data){
+
+    const flatArr = data.map((data) => {
+      return data.fields
+    })
+
+    const SibspCount = flatArr.reduce((obj, item) => {
+      if(item.sibsp in obj){
+        obj[item.sibsp]++
+        return obj
+      } else {
+        obj[item.sibsp] = 1
+        return obj
+      }
+    }, {})
+
+    visualSibSp(SibspCount)
+    
+  }
+
+  function visualSibSp(data) {
+    const max = Math.max(...Object.values(data))
+    const keys = Object.keys(data)
+    const values = Object.values(data)
+
+    const container = document.getElementById('container')
+    container.style.width = '500px'
+    container.style.height = '200px'
+    container.style.border = '1px solid grey'
+    container.style.display = 'flex'
+    container.style.justifyContent = 'center'
+    container.style.alignItems = 'flex-end'
+
+    values.forEach(value => {
+      const el = document.createElement('div')
+
+      el.style.height = `${value / max * 100}%`
+      el.style.backgroundColor = '#23f'
+      el.style.margin = '0 5px'
+      el.style.flex = 1
+      container.appendChild(el)
+    })
+
+
+  }
+
+</script>
