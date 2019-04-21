@@ -31,6 +31,50 @@
         <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
         <script src="//d3js.org/topojson.v1.min.js"></script>
         <script>
+
+            fetch('metal_bands_2017.csv')
+            .then(res => res.text())
+            // .then(data => handleCSV(data))
+            // .then(cleanData => getBandByCountry(cleanData))
+            .then(data => handleCSV(data))
+            .then(data => getBandByCountry(data))
+
+            function handleCSV(data) {
+                const a = data.split('\n')
+                const objectArr = []
+                const keys = a[0].split(',')
+                for (let i = 1; i < a.length; i++) {
+                    const obj = {}
+                    const row = a[i].split(',')
+                    for (let j = 0; j < row.length; j++) {
+                        obj[keys[j]] = row[j]
+                    }
+                    objectArr.push(obj)
+                }
+                // console.log(objectArr)
+                return objectArr
+            }
+
+            function hasNumber(string) {
+                return /\d/.test(string)
+            }
+
+            function getBandByCountry(data) {
+                // console.log(data)
+                let count = 0
+                const bandCountryData = data.reduce((obj, band) => {
+                    if(band.origin in obj) {
+                        obj[band.origin]++
+                        return obj
+                    } else {
+                        obj[band.origin] = 1
+                        return obj
+                    }
+                }, {})
+                console.log(bandCountryData)
+                return(bandCountryData)
+            }
+
             /* JavaScript goes here. */
             // globals used in graph
             var mapdata = {};
@@ -72,11 +116,11 @@
                 .attr("class", "graticule")
                 .attr("d", path);
 
-            d3.json('mockelasticdata.json', function(error, mockdata) {
+            d3.json('mockdata.json', function(error, mockdata) {
                 if (error) return console.error(error);
                 console.log('mockdata',mockdata);
                 mapdata = mockdata;
-                draw(mockdata)
+                draw(mapdata)
             });
 
             function draw(data) {
