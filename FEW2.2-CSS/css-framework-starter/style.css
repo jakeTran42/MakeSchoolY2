@@ -1,0 +1,77 @@
+.container {
+	width: 600px;
+	margin: auto;
+}
+
+section {
+	border: 2px solid #aaa;
+	padding: 1em;
+	margin-bottom: 1em;
+}
+
+.color-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 2em;
+}
+
+.color-grid > div {
+	height: 100px;
+	border: 1px solid #999;
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+
+.color-grid > div:nth-child(1) {
+	background-color: var(--color-background);
+}
+
+.color-grid > div:nth-child(2) {
+	background-color: var(--color-foreground);
+	color: var(--color-background);
+}
+
+.color-grid > div:nth-child(3) {
+	background-color: var(--color-dark);
+	color: var(--color-background);
+}
+
+.color-grid > div:nth-child(4) {
+	background-color: var(--color-light);
+}
+
+.color-grid > div:nth-child(5) {
+	background-color: var(--color-md-light);
+}
+
+.color-grid > div:nth-child(6) {
+	background-color: var(--color-md-dark);
+	color: var(--color-background);
+}
+
+.color-grid > div:nth-child(7) {
+	background-color: var(--color-primary);
+	color: var(--color-background);
+}
+
+.color-grid > div:nth-child(8) {
+	background-color: var(--color-info);
+	color: var(--color-background);
+}
+
+.color-grid > div:nth-child(9) {
+	background-color: var(--color-success);
+	color: var(--color-background);
+}
+
+.color-grid > div:nth-child(10) {
+	background-color: var(--color-danger);
+	color: var(--color-background);
+}
+	
+.color-grid > div:nth-child(11) {
+	background-color: var(--color-callout);
+	color: var(--color-background);
+}
+	

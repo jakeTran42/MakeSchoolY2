@@ -1,0 +1,25 @@
+:root {
+	/* Colors */
+	--color-background: #f4f6f6;
+	--color-foreground: #21284a;
+	--color-dark: #333;
+	--color-light: #fff;
+	--color-md-light: #aaa;
+	--color-md-dark: #666;
+	--color-primary: #253eb8;
+	--color-info: #cf455c;
+	--color-success: #a1dd70;
+	--color-danger: #cd3f3e;
+	--color-callout: #f7be16;
+
+	/* Font Styles */
+	--font-size: 16px;
+	--font-line-height: 1;
+	/* Font Stacks */
+	--font-stack: 'Lacquer', sans-serif;
+	--font-stack-code: Courier;
+	
+	/* Layout */
+	--vertical-space: 1rem;
+}
+			
