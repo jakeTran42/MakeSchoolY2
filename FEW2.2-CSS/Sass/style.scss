@@ -1,0 +1,292 @@
+@import url('https://fonts.googleapis.com/css?family=Telex');
+
+// Navigation Variables
+$content-width: 1000px;
+$breakpoint: 799px;
+$nav-height: 70px;
+$nav-background: #262626;
+$nav-font-color: #ffffff;
+$link-hover-color: #2581DC;
+$bg_color: #000000;
+$text_color: #ffffff;
+$shadow_color: #ff0000;
+$font_name: 'Telex';
+$font_size: 20px;
+
+body, html {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	background: $bg_color;
+	font-family: $font_name;
+}
+
+// Outer navigation wrapper
+.navigation {
+  height: $nav-height;
+  background: $nav-background;
+}
+
+// Logo and branding
+.brand {
+  position: absolute;
+  padding-left: 20px;
+  float: left;
+  line-height: $nav-height;
+  text-transform: uppercase;
+  font-size: 1.4em;
+  a,
+  a:visited {
+    color: $nav-font-color;
+    text-decoration: none;
+  }
+}
+
+// Container with no padding for navbar
+.nav-container {
+  max-width: $content-width;
+  margin: 0 auto;
+}
+
+// Navigation 
+nav {
+  float: right;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      float: left;
+      position: relative;
+      a,
+      a:visited {
+        display: block;
+        padding: 0 20px;
+        line-height: $nav-height;
+        background: $nav-background;
+        color: $nav-font-color;
+        text-decoration: none;
+        &:hover {
+          background: $link-hover-color;
+          color: $nav-font-color;
+        }
+        &:not(:only-child):after {
+          padding-left: 4px;
+          content: ' ▾';
+        }
+      } // Dropdown list
+      ul li {
+        min-width: 190px;
+        a {
+          padding: 15px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+}
+
+// Dropdown list binds to JS toggle event
+.nav-dropdown {
+  position: absolute;
+  display: none;
+  z-index: 1;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobile navigation */
+
+// Binds to JS Toggle
+.nav-mobile {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $nav-background;
+  height: $nav-height;
+  width: $nav-height;
+}
+@media only screen and (max-width: 798px) {
+  // Hamburger nav visible on mobile only
+  .nav-mobile {
+    display: block;
+  }
+  nav {
+   width: 100%;
+    padding: $nav-height 0 15px;
+    ul {
+      display: none;
+      li {
+        float: none;
+        a {
+          padding: 15px;
+          line-height: 20px;
+        }
+        ul li a {
+          padding-left: 30px;
+        }
+      }
+    }
+  }
+  .nav-dropdown {
+    position: static;
+  }
+}
+@media screen and (min-width: $breakpoint) {
+  .nav-list {
+    display: block !important;
+  }
+}
+#nav-toggle {
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  cursor: pointer;
+  padding: 10px 35px 16px 0px;
+  span,
+  span:before,
+  span:after {
+    cursor: pointer;
+    border-radius: 1px;
+    height: 5px;
+    width: 35px;
+    background: $nav-font-color;
+    position: absolute;
+    display: block;
+    content: '';
+    transition: all 300ms ease-in-out;
+  }
+  span:before {
+    top: -10px;
+  }
+  span:after {
+    bottom: -10px;
+  }
+  &.active span {
+    background-color: transparent;
+    &:before,
+    &:after {
+      top: 0;
+    }
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+@mixin border-radius ($r:2px) {
+	-webkit-border-radius: $r;
+	-moz-border-radius: $r;
+	border-radius: $r;
+}
+
+@mixin box-shadow ($box_shadow_color: #000088) {
+	-webkit-box-shadow: 0 0 $font_size*3 $font_size/5 $box_shadow_color;
+	-moz-box-shadow: 0 0 $font_size*3 $font_size/5 $box_shadow_color;
+	box-shadow: 0 0 $font_size*3 $font_size/5 $box_shadow_color;
+}
+
+@mixin box-3d ($perspective:500px) {
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	-ms-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-perspective: $perspective;
+	-moz-perspective: $perspective;
+	-o-perspective: $perspective;
+	-ms-perspective: $perspective;
+	perspective: $perspective;
+}
+
+@mixin animate-rotate-x () {
+	-webkit-animation: animate-rotate-x 1s ease infinite;
+	-moz-animation: animate-rotate-x 1s ease infinite;
+	animation: animate-rotate-x 1s ease infinite;
+}
+
+@mixin zero-percent () {
+	-webkit-transform: rotateX(1deg);
+	-moz-transform: rotateX(1deg);
+	-o-transform: rotateX(1deg);
+	-ms-transform: rotateX(1deg);
+	transform: rotateX(1deg);
+}
+
+@mixin hundread-percent () {
+	-webkit-transform: rotateX(360deg);
+	-moz-transform: rotateX(360deg);
+	-o-transform: rotateX(360deg);
+	-ms-transform: rotateX(360deg);
+	transform: rotateX(360deg);
+}
+
+*, *:after, *:before {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.loading {
+	color: $text_color;
+	font-size: $font_size;
+	height: $font_size;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	margin-top: -$font_size / 2;
+	@include box-3d;
+	letter-spacing: $font_size / 10;
+	text-rendering: optimizelegibility;
+	-webkit-font-smoothing: antialiased;
+	text-shadow: 2px 2px $font_size $shadow_color;
+	margin-left: $font_size;
+}
+
+.rotate {
+    // display: inline;
+	position: absolute;
+	background-color: $text_color;
+	color: $bg_color;
+	@include border-radius;
+	@include box-shadow;
+	@include animate-rotate-x;
+	margin-left: -$font_size;
+}
+
+@-webkit-keyframes animate-rotate-x {
+	0% {
+		@include zero-percent;
+	}
+	100% {
+		@include hundread-percent;
+	}
+}
+
+@-moz-keyframes animate-rotate-x {
+	0% {
+		@include zero-percent;
+	}
+	100% {
+		@include hundread-percent;
+	}
+}
+
+@keyframes animate-rotate-x {
+	0% {
+		@include zero-percent;
+	}
+	100% {
+		@include hundread-percent;
+	}
+}
+
+
+
