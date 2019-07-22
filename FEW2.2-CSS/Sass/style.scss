@@ -4,10 +4,10 @@
 $content-width: 1000px;
 $breakpoint: 799px;
 $nav-height: 70px;
-$nav-background: #262626;
+$nav-background: #31353d;
 $nav-font-color: #ffffff;
 $link-hover-color: #2581DC;
-$bg_color: #000000;
+$bg_color: #31353d;
 $text_color: #ffffff;
 $shadow_color: #ff0000;
 $font_name: 'Telex';
@@ -23,13 +23,12 @@ body {
 	font-family: $font_name;
 }
 
-// Outer navigation wrapper
+// Outer navigation
 .navigation {
   height: $nav-height;
   background: $nav-background;
 }
 
-// Logo and branding
 .brand {
   position: absolute;
   padding-left: 20px;
@@ -44,7 +43,6 @@ body {
   }
 }
 
-// Container with no padding for navbar
 .nav-container {
   max-width: $content-width;
   margin: 0 auto;
@@ -88,97 +86,6 @@ nav {
   }
 }
 
-// Dropdown list binds to JS toggle event
-.nav-dropdown {
-  position: absolute;
-  display: none;
-  z-index: 1;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Mobile navigation */
-
-// Binds to JS Toggle
-.nav-mobile {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  background: $nav-background;
-  height: $nav-height;
-  width: $nav-height;
-}
-@media only screen and (max-width: 798px) {
-  // Hamburger nav visible on mobile only
-  .nav-mobile {
-    display: block;
-  }
-  nav {
-   width: 100%;
-    padding: $nav-height 0 15px;
-    ul {
-      display: none;
-      li {
-        float: none;
-        a {
-          padding: 15px;
-          line-height: 20px;
-        }
-        ul li a {
-          padding-left: 30px;
-        }
-      }
-    }
-  }
-  .nav-dropdown {
-    position: static;
-  }
-}
-@media screen and (min-width: $breakpoint) {
-  .nav-list {
-    display: block !important;
-  }
-}
-#nav-toggle {
-  position: absolute;
-  left: 18px;
-  top: 22px;
-  cursor: pointer;
-  padding: 10px 35px 16px 0px;
-  span,
-  span:before,
-  span:after {
-    cursor: pointer;
-    border-radius: 1px;
-    height: 5px;
-    width: 35px;
-    background: $nav-font-color;
-    position: absolute;
-    display: block;
-    content: '';
-    transition: all 300ms ease-in-out;
-  }
-  span:before {
-    top: -10px;
-  }
-  span:after {
-    bottom: -10px;
-  }
-  &.active span {
-    background-color: transparent;
-    &:before,
-    &:after {
-      top: 0;
-    }
-    &:before {
-      transform: rotate(45deg);
-    }
-    &:after {
-      transform: rotate(-45deg);
-    }
-  }
-}
-
 @mixin border-radius ($r:2px) {
 	-webkit-border-radius: $r;
 	-moz-border-radius: $r;
@@ -218,7 +125,7 @@ nav {
 	transform: rotateX(1deg);
 }
 
-@mixin hundread-percent () {
+@mixin hundred-percent () {
 	-webkit-transform: rotateX(360deg);
 	-moz-transform: rotateX(360deg);
 	-o-transform: rotateX(360deg);
@@ -266,7 +173,7 @@ nav {
 		@include zero-percent;
 	}
 	100% {
-		@include hundread-percent;
+		@include hundred-percent;
 	}
 }
 
@@ -275,7 +182,7 @@ nav {
 		@include zero-percent;
 	}
 	100% {
-		@include hundread-percent;
+		@include hundred-percent;
 	}
 }
 
@@ -284,7 +191,7 @@ nav {
 		@include zero-percent;
 	}
 	100% {
-		@include hundread-percent;
+		@include hundred-percent;
 	}
 }
 
