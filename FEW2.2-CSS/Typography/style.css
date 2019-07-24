@@ -1,0 +1,140 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.ag-tagline {
+  margin: 0 5px;
+  color: #F44336;
+  list-style: circle;
+  position: relative;
+  padding-left: 0px;
+  font-weight: bold;
+}
+
+.ag-header {
+  box-shadow: 0 0 20px 0 rgba(20, 49, 167, 0.1);
+  width: 800px;
+  margin: 0 auto;
+  float: none;
+  text-align: left;
+  position: relative;
+  z-index: 9999;
+  margin-top: 20px;
+  padding: 60px 20px;
+  padding-top: 60px;
+  overflow: hidden;
+}
+.ag-header .divider {
+  width: 62%;
+  margin: 0 auto;
+  float: right;
+}
+.ag-header h2 {
+  font-size: 55px;
+  line-height: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #031D3C;
+  font-weight: bold;
+  padding-right: 30px;
+}
+.ag-header h2 p {
+  font-size: 18px;
+  line-height: 26px;
+  margin-top: 0;
+  margin-bottom: 0;
+  opacity: 0.7;
+  padding-left: 0px;
+}
+.ag-header h2 p:first-child {
+  margin-top: 10px;
+}
+
+.ag-head-img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-size: cover;
+  background-position: center center;
+}
+
+.bg-img {
+  background-size: cover;
+  background-position: center center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 65%;
+  left: 0;
+  display: inline-block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.header-copanyname {
+  font-size: 310px;
+  line-height: 250px;
+  position: absolute;
+  left: -70px;
+  right: 0;
+  text-align: center;
+  bottom: 0;
+  opacity: 0.03;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.info {
+  color: #000;
+  opacity: 0.9;
+  font-size: 15px;
+  line-height: 22px;
+  padding-right: 15%;
+  font-family: system-ui;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  padding-left: 0px;
+}
+ul li {
+  display: inline-block;
+  margin: 0 4px;
+}
+ul li a {
+  text-decoration: none;
+  color: #F44336;
+}
+ul li a .fa {
+  color: #F44336;
+}
+ul li a .fa.active {
+  color: #00BCD4;
+}
+ul li a .fa:hover {
+  color: #00BCD4;
+}
+
+a {
+  text-decoration: none;
+  color: #F44336;
+}
+a .fa {
+  color: #F44336;
+}
+
+/*# sourceMappingURL=style.css.map */
