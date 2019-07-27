@@ -1,0 +1,82 @@
+.transition, .field__input, .field__label {
+  transition: all 0.1s ease;
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.field {
+  position: relative;
+  display: inline-block;
+  float: left;
+}
+.field .helptext {
+  font-size: 14px;
+  color: #888;
+  font-style: italic;
+  margin: 0;
+  padding: 10px;
+}
+.field--quarter {
+  width: 25%;
+}
+.field--half {
+  width: 50%;
+}
+.field--half.form-action {
+  border-top-color: transparent;
+  padding-top: 10px;
+}
+.field--three-quarter {
+  width: 75%;
+}
+.field--block {
+  width: 100%;
+}
+.field--block.form-action {
+  padding-top: 15px;
+  margin-top: 15px;
+  border-top: 1px solid #9CD3A3;
+}
+.field__label {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-size: 12px;
+  color: #888;
+}
+.field__input {
+  padding: 25px 10px 10px;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+
+.input {
+  outline: 0;
+  border: 1px solid #ccc;
+}
+.input:focus {
+  background-color: white;
+  border-color: #4CAF58;
+}
+.input:focus ~ label {
+  color: #4CAF58;
+}
+.input--textarea {
+  max-width: 100%;
+  height: 100px;
+  max-height: 100px;
+}
+.input--select {
+  padding-right: 20px;
+}
+.label--required:after {
+  content: "*";
+  color: tomato;
+  margin-left: 5px;
+}
+
+/*# sourceMappingURL=form-style.css.map */

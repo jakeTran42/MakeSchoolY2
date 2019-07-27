@@ -1,3 +1,5 @@
+* { box-sizing: border-box; }
+
 body {
 	background-color: var(--color-background);
 	color: var(--color-foreground);
@@ -28,7 +30,9 @@ h5 { font-size: 1.1em; }
 h6 { font-size: 1em; }
 			
 strong {
-	color: var(--color-md-dark);
+	color: var(--color-dark);
+	font-weight: bold;
+	font-size: 1.05em;
 }
 
 em {
@@ -50,9 +54,10 @@ em {
 /* Anchor Styles */
 
 a {
-	color: var(--color-primary);
-	text-decoration: none;
+	/* text-decoration: none; */
+	color: var(--color-dark);
 	transition: 200ms;
+	font-size: 1.1em;
 }
 
 a:link {}
@@ -77,10 +82,10 @@ input, label {
 	display: block;
 }
 			
-form {
+/* form {
 	display: flex;
 	flex-direction: column;
-}
+} */
 
 button {
 	--weight: normal; 
@@ -97,7 +102,7 @@ button {
 	border-width: 2px;
 	border-style: solid;
 	border-color: transparent;
-	border-radius: 0.5em;
+	/* border-radius: 0.5em; */
 	padding: 0.7em 1em; /* Use padding to give the text some space */
 	font-size: 1em;
 
@@ -129,46 +134,87 @@ button:active {
 	filter: brightness(80%);
 }
 
-input[type=text], 
-input[type=email], 
-input[type=password], 
-textarea {
-	--border-color: var(--color-md-dark);
-	padding: 0.7em 1em;
-	border: 2px solid var(--border-color);
-	border-radius: 0.5em;
-	font-size: 1em;
+/* Button Groups */
 
-	/* Add a transition */
-	transition: 200ms;
-
-	/* 
-		This removes the accessibility outline 
-		which should never be removed
-		https://a11yproject.com/posts/never-remove-css-outlines/
-	*/
-	outline: none !important; 
+.btn-grp button {
+	border: 1px solid var(--color-light); /* Green border */
+	padding: 10px 24px; /* Some padding */
+	cursor: pointer; /* Pointer/hand icon */
+	float: left; /* Float the buttons side by side */
+}
+  
+  /* Clear floats (clearfix hack) */
+.btn-grp:after {
+	content: "";
+	clear: both;
+	display: table;
+}
+  
+.btn-grp button:not(:last-child) {
+	border-right: none; /* Prevent double borders */
+}
+  
+  /* Add a background color on hover */
+.btn-grp button:hover {
+	/* background-color: var(--color-md-dark);
+	color: var(--color-light); */
+	border-color: #2196F3;
 }
 
-  input[type=text]:focus, 
-  input[type=email]:focus, 
-  input[type=password]:focus,
-  textarea:focus {
-    --border-color: var(--color-primary);
+.btn-grp button:first-child {
+	border-radius: 5px 0px 0px 5px;
   }
+  
+.btn-grp button:last-child {
+	border-radius: 0px 5px 5px 0px;
+}
 
-  label {
-    display: block;
-    margin: 0 0 1em 0;
-  }
+/* nav bar */
 
-  label > span {
-    font-size: 0.75em;
-    display: block;
-    margin: 1em 0;
-  }
+.navbar {
+	display: flex;
+	flex-direction: row;
+	background: var(--default-nav-bg);
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
 
+.navbar ul {
+	padding: 0px;
+	margin: 0px;
+	width: 50%;
+	max-width: 300px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-pack: distribute;
+		justify-content: space-around;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
+	list-style: none;
+}
 
+.navbar .logo {
+	font-size: 1.3em;
+	padding: 10px;
+}
+
+nav.navbar ul li a {
+	color: var(--color-danger);
+	text-decoration: none;
+}
+
+nav.light ul li a {
+	color: var(--color-dark);
+	text-decoration: none;
+}
+
+nav.dark ul li a {
+	color: var(--color-light);
+	text-decoration: none;
+}
 
 /* Switch Click 
 This switch is toggled on a click. The JavaScript 
@@ -290,7 +336,7 @@ position left to 40px. */
 }
 
 
-/* Custom Bootstrap */
+/* Custom Alerts */
 
 .alert-danger {
 	background: #f8d7da;
@@ -311,4 +357,54 @@ position left to 40px. */
 	color: var(--color-callout);
 	padding: 10px;
 	margin: 10px;
+}
+
+
+/* Attributes */
+
+.light {
+	background: var(--color-background);
+	color: aliceblue;
+}
+
+.dark {
+	background: var(--color-dark);
+}
+
+.shadow {
+	box-shadow: 0 10px 12px rgba(0, 0, 0, 0.35);
+}
+
+.s-rounded {
+	border-radius: 3px;
+}
+
+.m-rounded {
+	border-radius: 7px;
+}
+
+.l-rounded {
+	border-radius: 12px;
+}
+
+.xl-rounded {
+	border-radius: 60px;
+}
+
+.flex-col {
+	display: flex;
+	flex-direction: column;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.center-hor {
+	justify-content: center;
+}
+
+.center-ver {
+	align-items: center;
 }

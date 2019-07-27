@@ -1,5 +1,5 @@
 .container {
-	width: 600px;
+	width: 90%;
 	margin: auto;
 }
 
@@ -7,6 +7,8 @@ section {
 	border: 2px solid #aaa;
 	padding: 1em;
 	margin-bottom: 1em;
+	border-radius: 5px;
+	box-shadow: 0 10px 12px rgba(0, 0, 0, 0.35);
 }
 
 .color-grid {
@@ -74,4 +76,13 @@ section {
 	background-color: var(--color-callout);
 	color: var(--color-background);
 }
-	
+
+.color-box {
+	border-radius: 5px;
+}
+
+.button-types {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between
+}

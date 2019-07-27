@@ -1,115 +1,165 @@
 <html>
-<head>
-	<title>frmwrk example</title>
-	<link rel="stylesheet" href="frmwrk-theme.css">
-	<link rel="stylesheet" href="frmwrk.css">
-	<link rel="stylesheet" href="style.css">
-	<link href="https://fonts.googleapis.com/css?family=Lacquer&display=swap" rel="stylesheet">
-</head>
-<body>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Framework</title>
+	<head>
+		<title>frmwrk example</title>
+		<link rel="stylesheet" href="frmwrk-theme.css">
+		<link rel="stylesheet" href="frmwrk.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="./forms/form-style.css">
+	</head>
+	<body>
 
-  <div class="container">
-		<section>
-			<h1>Colors</h1>
-			<div class="color-grid">
-				<div>Background</div>
-				<div>Forground</div>
-				<div>Dark</div>
-				<div>Light</div>
-				<div>md-Dark</div>
-				<div>md-Light</div>
-				<div>Primary</div>
-				<div>Info</div>
-				<div>Success</div>
-				<div>Danger</div>
-				<div>Callout</div>
-				<div>None</div>
-			</div>
-		</section>
-		
-		<section>
-			<h1>Headings</h1>
-			<h1>H1 Heading</h1>
-			<h2>H2 Heading</h2>
-			<h3>H3 Heading</h3>
-			<h4>H4 Heading</h4>
-			<h5>H5 Heading</h5>
-			<h6>H6 Heading</h6>
-		</section>
-		
-		<section>
-			<h1>Paragraph styles</h1>
-			<p>This is an <strong>average</strong> paragraph. It includes some <em>inline</em> elements such as &lt;strong&gt; and &lt;em&gt;.</p>
-		</section>
-		
-		<section>
-			<h2>Buttons</h2>
-			<p>This is your average button. You might want to click it.</p>
-			<button>Submit</button>
+		<nav class="navbar">
+			<ul>
+				<li class="logo"><a href="#"><h1>LOGO</h1></a></li>
+				<li><a href="#">Product</a></li>
+			</ul>
+			<ul>
+				<li><a href="#">About</a></li>
+				<li><a href="#">Dropdown</a></li>
+				<li><a href="#">Contact</a></li>
+			</ul>
+		</nav>
 
-			<p>This button has consequences. You might want to think twice before clicking.</p>
-			<button 
-				style="--weight: bold; --background-color: #f85353;"
-			>Delete</button>
+		<div class="container">
+			<section>
+				<h1>Colors</h1>
+				<div class="color-grid">
+					<div class="color-box shadow">Background</div>
+					<div class="color-box">Forground</div>
+					<div class="color-box">Dark</div>
+					<div class="color-box">Light</div>
+					<div class="color-box">md-Light</div>
+					<div class="color-box">md-Dark</div>
+					<div class="color-box">Primary</div>
+					<div class="color-box">Info</div>
+					<div class="color-box">Success</div>
+					<div class="color-box">Danger</div>
+					<div class="color-box">Callout</div>
+					<div class="color-box">None</div>
+				</div>
+			</section>
+			
+			<section class="color-grid">
+				<h1>H1 Heading</h1>
+				<h2>H2 Heading</h2>
+				<h3>H3 Heading</h3>
+				<h4>H4 Heading</h4>
+				<h5>H5 Heading</h5>
+				<h6>H6 Heading</h6>
+			</section>
+			
+			<section>
+				<h1>Paragraph styles</h1>
+				<p>This is a <strong>Stronk</strong> tag<br> <br> 
+				This is <em>Italic</em> tag
+				</p>
+			</section>
+			
+			<section class="button-types">
 
-			<button 
-				style="--background-color: #6bc253;"
-			>Go!</button>
-		</section>
+				<h2>Buttons</h2>
 
-		<section>
-			<h2>Warning Types</h2>
-			<div class="alert-danger">This is a Danger alert</div>
-			<div class="alert-success">This is a Success alert</div>
-			<div class="alert-warning">This is a Warning alert</div>
-		</section>
-		
-		<section>
-			<h2>Links</h2>
-			<p>This <a href="#">paragraph</a> contains a couple <a href="#">links</a> to show off their styles in context.</p>
-		</section>
-
-		<section>
-			<h2>Forms and controls</h2>
-			<form>
-				<label>
-					<span>Text:</span>
-					<input type="text" placeholder="What is your name?">
-				</label>
-
-				<label>
-					<span>Email:</span>
-					<input type="email" placeholder="What is your name?">
-				</label>
-
-				<label>
-					<span>Password:</span>
-					<input type="password" placeholder="What is your name?">
-				</label>
-
-				<label>
-					<span>Your comments</span>
-					<textarea placeholder="Your comment"></textarea>
-				</label>
-
-				<!-- Switch with Click -->
 				<div>
-					<label id="switch-2" class="switch-2">
-						<input type="checkbox">
-						<div>
-							<div></div>
-						</div>
-					</label>
-					<span>Click Switch no JS</span>
+					<p>Default</p><br>
+					<button >Submit</button>
 				</div>
 
-				<label class="control-checkbox">One
-					<input type="checkbox" checked="checked">
-					<span></span>
-				</label>
-			</form>
-		</section>
+				<div>
+					<p>Delete</p><br>
+					<button 
+						style="--weight: bold; --background-color: #f85353;"
+					>Delete</button>
+				</div>
 
-  </div>
-</body>
+				<div>
+					<p>Success</p><br>
+					<button 
+						style="--background-color: #6bc253;"
+					>Success</button>
+				</div>
+			</section>
+
+			<section>
+				<h2>Button Groups</h2>
+				<div class="btn-grp">
+					<button>Button 1</button>
+					<button>Button 2</button>
+					<button>Button 3</button>
+				</div>
+			</section>
+
+			<section>
+				<h2>Warning Types</h2>
+				<div class="alert-danger">This is a Danger alert</div>
+				<div class="alert-success">This is a Success alert</div>
+				<div class="alert-warning">This is a Warning alert</div>
+			</section>
+			
+			<section>
+				<h2>Links</h2>
+				<p>This <a href="#">is how</a> a few <a href="#">links</a> are displayed</p>
+			</section>
+
+			<section style="display: table;">
+				<h2>Field and Labels</h2>
+				<div class="field field--block">
+					<input class="field__input input input--text input--required" id="1" type="text" />
+					<label class="field__label label--required" for="1">Text</label>
+				</div>
+			</section>
+
+			<section style="display: table;">
+				<h2>Forms Groups</h2>
+				<div class="field field--block">
+					<input class="field__input input input--text input--required" id="1" type="text" />
+					<label class="field__label label--required" for="1">Full Name</label>
+				</div>
+				<div class="field field--half">
+					<input class="field__input input input--text" id="3" type="text" />
+					<label class="field__label" for="3">Email</label>		
+				</div>
+				
+				<div class="field field--half">
+					<input class="field__input input input--text" id="4" type="text" />
+					<label class="field__label" for="4">Company</label>	
+				</div>
+				
+				<div class="field field--three-quarter">
+					<input class="field__input input input--text" id="5" type="text" />
+					<label class="field__label" for="5">Address</label>	
+				</div>
+				
+				<div class="field field--quarter">
+					<input class="field__input input input--text" id="6" type="text" />
+					<label class="field__label" for="6">Zip code</label>
+				</div>
+				
+				<div class="field field--block">
+					<textarea class="field__input input input--textarea" id="7" type="text"></textarea>
+					<label class="field__label" for="7">Comments</label>
+				</div>
+				<div class="field field--block form-action">
+					<button class="xl-rounded" style="background: #4CAF58; float: right;">Submit &rarr;</button>
+				</div>
+			</section>
+
+			<section>
+				<h2>Flex elements</h2>
+				<h6>These items are using flex-box to line up in rows and center verically and horizontally</h6>
+				<div class="flex-row center-hor center-ver" style="justify-content: space-around;">
+					<div style="width: 100px; height: 100px; background: #f85353;"></div>
+					<div style="width: 100px; height: 100px; background: darkcyan;"></div>
+					<div style="width: 100px; height: 100px; background: #5452c2;"></div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Custom Elements</h2>
+			</section>
+
+		</div>
+	</body>
 </html>
