@@ -68,7 +68,19 @@
 	// 	font-size: 11px;
 	// 	padding: 1em 2em;
 	// 	margin: 0;
-	// }
+    // }
+    
+    .btn:hover {
+        border-color: aliceblue;
+        background: #cf455c !important;
+        color: aliceblue;
+    }
+
+    .btn:active {
+        background: #4b020e;
+        color: white;
+        border-color: #cf455c;
+    }
 }
 
 // input styles

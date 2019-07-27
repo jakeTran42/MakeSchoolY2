@@ -402,9 +402,11 @@ position left to 40px. */
 }
 
 .center-hor {
+	display: flex;
 	justify-content: center;
 }
 
 .center-ver {
+	display: flex;
 	align-items: center;
 }

@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="frmwrk.css">
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="./forms/form-style.css">
+		<script src="./components/copy-right.js"></script>
 	</head>
 	<body>
 
@@ -142,7 +143,7 @@
 					<label class="field__label" for="7">Comments</label>
 				</div>
 				<div class="field field--block form-action">
-					<button class="xl-rounded" style="background: #4CAF58; float: right;">Submit &rarr;</button>
+					<button class="xl-rounded btn" style="background: #4CAF58; float: right;">Submit &rarr;</button>
 				</div>
 			</section>
 
@@ -157,7 +158,23 @@
 			</section>
 
 			<section>
-				<h2>Custom Elements</h2>
+				<h2>Custom Components/Elements</h2>
+				<!-- <div>
+					<h4>Copyright Tag component</h4>
+					<copyright-tag name="Overlord"></copyright-tag>
+				</div> -->
+				<table id=custom-components>
+					<tr>
+						<th>Name</th>
+						<th>Tag</th>
+						<th>Demo</th>
+					</tr>
+					<tr>
+						<td>Copyright</td>
+						<td> &lt;copyright name:""&gt;&lt;/copyright&gt; </td>
+						<td><copyright-tag name="Overlord"></copyright-tag></td>
+					</tr>
+				</table>
 			</section>
 
 		</div>

@@ -79,6 +79,7 @@ section {
 
 .color-box {
 	border-radius: 5px;
+	align-items: center;
 }
 
 .button-types {
@@ -86,3 +87,25 @@ section {
 	flex-direction: row;
 	justify-content: space-between
 }
+
+#custom-components {
+	border-collapse: collapse;
+  	width: 100%;
+}
+
+#custom-components td, #custom-components th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#custom-components tr:nth-child(even){background-color: #f2f2f2;}
+
+#custom-components tr:hover {background-color: #ddd;}
+
+#custom-components th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: var(--color-info);
+	color: white;
+  }
