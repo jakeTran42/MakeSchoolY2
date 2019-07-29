@@ -391,6 +391,10 @@ position left to 40px. */
 	border-radius: 60px;
 }
 
+.flex {
+	display: flex;
+}
+
 .flex-col {
 	display: flex;
 	flex-direction: column;
