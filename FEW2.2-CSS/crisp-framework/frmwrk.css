@@ -201,6 +201,11 @@ button:active {
 	padding: 10px;
 }
 
+nav.navbar ul li {
+	font-weight: bold;
+	font-size: 1.05em;
+}
+
 nav.navbar ul li a {
 	color: var(--color-danger);
 	text-decoration: none;

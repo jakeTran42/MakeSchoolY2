@@ -52,7 +52,7 @@
 		@extend .transition !optional;
 		position: absolute;
 		top: 5px; left: 10px;
-		font-size: 12px;
+		font-size: 13px;
 		color: #888;
 	}
 	&__input {		
@@ -60,6 +60,7 @@
 		padding: 25px 10px 10px;
 		width: 100%;
 		background-color: #f2f2f2;
+		font-size: 16px;
 	}
 			
 	// .btn {
@@ -91,11 +92,11 @@
 	// general focus state
 	&:focus {
 		background-color: white;
-		border-color: #4CAF58;
+		border-color: #cf455c;
 		//box-shadow: inset 0 0 0 2px #E3EACC;
 		
 		~ label {
-			color: #4CAF58;
+			color: #cf455c;
 		}
 	}
 	
@@ -118,7 +119,7 @@
 	&--required {
 		&:after {
 			content:"*";
-			color: tomato;
+			color: #cf455c;
 			margin-left: 5px;
 		}
 	}
