@@ -11,7 +11,7 @@
         connectedCallback() {
             let name = this._getName()
             let year = new Date().getFullYear()
-            this.node.innerHTML = `<p>&copy; ${name} ${year}</p>`
+            this.node.innerHTML = `<p> Copyright &copy; ${year}</p>`
         }
 
         _getName() {
